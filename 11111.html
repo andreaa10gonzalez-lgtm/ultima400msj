@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GANAMOS • Jugá online con asesor personal 24/7</title>
+  <meta name="description" content="Hablá con un asesor por WhatsApp para empezar a jugar. Ayuda para cargar saldo, métodos de pago y soporte 24/7." />
+  <meta name="theme-color" content="#7b2de2" />
+  <meta property="og:title" content="GANAMOS • Jugá online con asesor personal 24/7" />
+  <meta property="og:description" content="Hablá con un asesor por WhatsApp para empezar a jugar. Ayuda para cargar saldo y soporte instantáneo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="imagen-hero.webp" />
+  <link rel="icon" href="favicon.png" />
+  <style>
+    :root{
+      --bg: #0b0b12;
+      --card: rgba(12,12,20,.82);
+      --text: #fff;
+      --muted: #cfd3dc;
+      --accentA:#8e2de2;
+      --accentB:#4a00e0;
+      --ok:#78e08f;
+      --warn:#ffcc00;
+      --brand:#25D366;
+      --ring: rgba(142,45,226,.6);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Inter,sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 70% -10%, rgba(142,45,226,.35), transparent 70%), url('casino.jpg') center/cover no-repeat fixed, var(--bg);
+      display:grid;place-items:center;
+    }
+    .wrap{width:min(1024px,94vw); margin:auto; padding:22px}
+    .hero{display:grid; gap:18px; grid-template-columns: 1.15fr .85fr; align-items:center}
+    .card{background:var(--card); border-radius:20px; padding:24px; box-shadow:0 15px 60px rgba(0,0,0,.55); backdrop-filter: blur(14px)}
+    .logo{font-weight:900; letter-spacing:.6px; font-size:clamp(28px,4.5vw,40px)}
+    .sub{color:var(--muted); font-size:clamp(14px,2.8vw,16px)}
+    .headline{font-size:clamp(22px,4.2vw,32px); font-weight:900; line-height:1.15}
+    .headline strong{background: linear-gradient(180deg, var(--accentA), var(--accentB)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .benefits{display:grid; gap:10px; margin:6px 0 8px}
+    .benefits li{list-style:none; display:flex; align-items:flex-start; gap:10px; color:#e9ecf4}
+    .benefits b{color:#fff}
+    .cta{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 20px; border-radius:14px; text-decoration:none; color:#0b0b12; background:linear-gradient(180deg,#25D366,#1ebe59); font-weight:900; box-shadow:0 10px 34px rgba(37,211,102,.35); border:2px solid rgba(255,255,255,.12)}
+    .cta:hover{transform:translateY(-1px)}
+    .cta:active{transform:translateY(0)}
+    .cta .tag{position:absolute; top:-10px; right:-10px; background:var(--warn); color:#000; font-weight:800; padding:4px 8px; border-radius:999px; font-size:12px; box-shadow:0 4px 16px rgba(0,0,0,.35)}
+    .trust{display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:10px}
+    .trust .chip{background:rgba(255,255,255,.08); padding:10px 12px; border-radius:12px; text-align:center; font-weight:700; color:#e7eaf3}
+    .pill{display:inline-block; padding:6px 12px; border-radius:999px; background:linear-gradient(180deg, var(--accentA), var(--accentB)); color:#fff; font-weight:900; box-shadow:0 8px 24px var(--ring); letter-spacing:.2px}
+    .pill small{font-weight:800; opacity:.95}
+    .panel{display:grid; gap:16px}
+    .phone-demo{position:relative; border-radius:22px; overflow:hidden; height:480px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12)}
+    .phone-demo .overlay{position:absolute; inset:0; background:radial-gradient(800px 280px at -10% -15%, rgba(142,45,226,.35), transparent 60%)}
+    .steps{display:grid; gap:10px}
+    .step{display:flex; gap:10px; align-items:flex-start}
+    .step .n{width:28px; height:28px; border-radius:50%; background:linear-gradient(180deg,var(--accentA),var(--accentB)); display:grid; place-items:center; font-weight:900}
+    .cta-row{display:flex; gap:10px; flex-wrap:wrap}
+    .sticky-bar{position:fixed; inset:auto 0 12px 0; display:flex; justify-content:center; z-index:999}
+    .sticky-bar a{box-shadow:0 10px 34px rgba(37,211,102,.45)}
+    .reminder{position:fixed; left:12px; right:12px; bottom:78px; z-index:998; display:none}
+    .reminder .inner{background:rgba(255,255,255,.08); backdrop-filter: blur(8px); border:1px solid rgba(255,255,255,.14); padding:10px 12px; border-radius:14px; display:flex; align-items:center; gap:8px}
+    .exit-overlay{position:fixed; inset:0; background:rgba(0,0,0,.72); display:none; align-items:center; justify-content:center; z-index:1000}
+    .modal{background:var(--card); width:min(520px,92vw); border-radius:18px; padding:18px; box-shadow:0 20px 60px rgba(0,0,0,.6)}
+    .modal h3{font-size:clamp(18px,4.2vw,24px); margin-bottom:6px}
+    .modal p{color:var(--muted)}
+    .modal .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .btn-ghost{background:rgba(255,255,255,.1); color:#fff; border:none; padding:12px 16px; border-radius:12px; font-weight:800}
+    @media (max-width:880px){.hero{grid-template-columns:1fr;}.phone-demo{height:320px}.trust{grid-template-columns: 1fr 1fr}}
+    @media (prefers-reduced-motion:reduce){.cta{transition:none}}
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '711179821799803');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=711179821799803&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="card panel" aria-labelledby="hero-title">
+        <div class="logo" id="hero-title">GANAMOS.NET</div>
+        <h1 class="headline">🔥 Tu cuenta puede arrancar hoy con <strong>beneficios exclusivos</strong>. Hablá con tu asesor ahora.</h1>
+        <p class="sub">Te ayudamos a <b>cargar saldo</b>, elegir juegos y resolver dudas por WhatsApp. Soporte 24/7.</p>
+        <ul class="benefits" role="list">
+          <li>✅ <b>Ayuda paso a paso</b> para tu primera carga</li>
+          <li>⚡ <b>Métodos de pago locales</b> y verificados</li>
+          <li>🔒 <b>Retiros sin límite</b> y soporte inmediato</li>
+        </ul>
+        <div><span class="pill">🎁 Bono de bienvenida con tu carga <small>(consultá condiciones)</small></span></div>
+        <div class="cta-row">
+          <a id="cta-hero" class="cta" href="#" rel="noopener" aria-label="Hablar por WhatsApp">💬 Quiero mi beneficio<span class="tag" aria-hidden="true">Bono de bienvenida</span></a>
+          <button id="cta-alt" class="btn-ghost" type="button">Hablar con asesor</button>
+        </div>
+        <p id="bonus-counter" style="font-size:14px; color:#cfcfcf; font-weight:700; margin-top:6px;">🎯 Solo <span id="contador">10</span> cupos disponibles hoy. Enviá el mensaje y asegurá tu beneficio ⏰</p>
+        <div class="trust">
+          <div class="chip">Atención humana 24/7</div>
+          <div class="chip">Pagos verificados</div>
+          <div class="chip">Soporte en minutos</div>
+        </div>
+      </div>
+      <div class="phone-demo card" aria-hidden="true">
+        <img src="imagen 1.jpg" alt="Vista de juegos online en el teléfono" style="width:100%; height:100%; object-fit:cover; border-radius:22px; display:block;" loading="lazy">
+        <div class="overlay"></div>
+      </div>
+    </section>
+  </div>
+  <script>
+    const PHONE = '541162808093';
+    const MESSAGES = [
+      'Hola 👋 Vi que hay cupos con beneficio, quiero activarlo ✅',
+      'Hola! Quiero aprovechar el bono de bienvenida, ¿me ayudás?',
+      'Hola 👋 Quiero empezar hoy con los beneficios de carga 💰'
+    ];
+    const UTM = 'utm_source=landing&utm_medium=cta&utm_campaign=whatsapp_asesor';
+    function waLink(source){
+      const txt = encodeURIComponent(MESSAGES[Math.floor(Math.random()*MESSAGES.length)] + `\n\nRef: ${source}`);
+      return `https://wa.me/${PHONE}?text=${txt}&${UTM}&utm_content=${encodeURIComponent(source)}`;
+    }
+    (function(){
+      const el = document.getElementById('contador');
+      if(!el) return;
+      let num = parseInt(el.textContent,10) || 10;
+      setInterval(()=>{ if(num>3){ num--; el.textContent = num; } }, 8000);
+    })();
+  </script>
+</body>
+</html>
