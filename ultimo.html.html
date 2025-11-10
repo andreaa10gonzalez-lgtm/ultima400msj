@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GANAMOS • Jugá online con asesor personal 24/7</title>
+  <meta name="description" content="Hablá con un asesor por WhatsApp para empezar a jugar. Ayuda para cargar saldo, métodos de pago y soporte 24/7." />
+  <meta name="theme-color" content="#7b2de2" />
+  <meta property="og:title" content="GANAMOS • Jugá online con asesor personal 24/7" />
+  <meta property="og:description" content="Hablá con un asesor por WhatsApp para empezar a jugar. Ayuda para cargar saldo y soporte instantáneo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="imagen-hero.webp" />
+  <link rel="icon" href="favicon.png" />
+  <style>
+    :root{
+      --bg: #0b0b12;
+      --card: rgba(12,12,20,.82);
+      --text: #fff;
+      --muted: #cfd3dc;
+      --accentA:#8e2de2; /* top */
+      --accentB:#4a00e0; /* bottom */
+      --ok:#78e08f;
+      --warn:#ffcc00;
+      --brand:#25D366; /* WhatsApp */
+      --ring: rgba(142,45,226,.6);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Inter,sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 70% -10%, rgba(142,45,226,.35), transparent 70%), url('casino.jpg') center/cover no-repeat fixed, var(--bg);
+      display:grid;place-items:center;
+    }
+    .wrap{width:min(1024px,94vw); margin:auto; padding:22px}
+    .hero{display:grid; gap:18px; grid-template-columns: 1.15fr .85fr; align-items:center}
+    .card{background:var(--card); border-radius:20px; padding:24px; box-shadow:0 15px 60px rgba(0,0,0,.55); backdrop-filter: blur(14px)}
+    .logo{font-weight:900; letter-spacing:.6px; font-size:clamp(28px,4.5vw,40px)}
+    .sub{color:var(--muted); font-size:clamp(14px,2.8vw,16px)}
+    .headline{font-size:clamp(22px,4.2vw,32px); font-weight:900; line-height:1.15}
+    .headline strong{background: linear-gradient(180deg, var(--accentA), var(--accentB)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .benefits{display:grid; gap:10px; margin:6px 0 8px}
+    .benefits li{list-style:none; display:flex; align-items:flex-start; gap:10px; color:#e9ecf4}
+    .benefits b{color:#fff}
+
+    .cta{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 20px; border-radius:14px; text-decoration:none; color:#0b0b12; background:linear-gradient(180deg,#25D366,#1ebe59); font-weight:900; box-shadow:0 10px 34px rgba(37,211,102,.35); border:2px solid rgba(255,255,255,.12)}
+    .cta:hover{transform:translateY(-1px)}
+    .cta:active{transform:translateY(0)}
+    .cta .tag{position:absolute; top:-10px; right:-10px; background:var(--warn); color:#000; font-weight:800; padding:4px 8px; border-radius:999px; font-size:12px; box-shadow:0 4px 16px rgba(0,0,0,.35)}
+
+    .trust{display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:10px}
+    .trust .chip{background:rgba(255,255,255,.08); padding:10px 12px; border-radius:12px; text-align:center; font-weight:700; color:#e7eaf3}
+
+    .panel{display:grid; gap:16px}
+
+    .phone-demo{position:relative; border-radius:22px; overflow:hidden; height:480px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.12)}
+    .phone-demo .overlay{position:absolute; inset:0; background:radial-gradient(800px 280px at -10% -15%, rgba(142,45,226,.35), transparent 60%)}
+    .steps{display:grid; gap:10px}
+    .step{display:flex; gap:10px; align-items:flex-start}
+    .step .n{width:28px; height:28px; border-radius:50%; background:linear-gradient(180deg,var(--accentA),var(--accentB)); display:grid; place-items:center; font-weight:900}
+
+    .cta-row{display:flex; gap:10px; flex-wrap:wrap}
+
+    .sticky-bar{position:fixed; inset:auto 0 12px 0; display:flex; justify-content:center; z-index:999}
+    .sticky-bar a{box-shadow:0 10px 34px rgba(37,211,102,.45)}
+
+    .reminder{position:fixed; left:12px; right:12px; bottom:78px; z-index:998; display:none}
+    .reminder .inner{background:rgba(255,255,255,.08); backdrop-filter: blur(8px); border:1px solid rgba(255,255,255,.14); padding:10px 12px; border-radius:14px; display:flex; align-items:center; gap:8px}
+
+    .exit-overlay{position:fixed; inset:0; background:rgba(0,0,0,.72); display:none; align-items:center; justify-content:center; z-index:1000}
+    .modal{background:var(--card); width:min(520px,92vw); border-radius:18px; padding:18px; box-shadow:0 20px 60px rgba(0,0,0,.6)}
+    .modal h3{font-size:clamp(18px,4.2vw,24px); margin-bottom:6px}
+    .modal p{color:var(--muted)}
+    .modal .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .btn-ghost{background:rgba(255,255,255,.1); color:#fff; border:none; padding:12px 16px; border-radius:12px; font-weight:800}
+
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;}
+      .phone-demo{height:320px}
+      .trust{grid-template-columns: 1fr 1fr}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .cta{transition:none}
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1303948534558420');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1303948534558420&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="card panel" aria-labelledby="hero-title">
+        <div class="logo" id="hero-title">GANAMOS.NET</div>
+        <h1 class="headline">Hablá con un <strong>asesor personal</strong> para <strong>empezar a jugar hoy</strong></h1>
+        <p class="sub">Te ayudamos a <b>cargar saldo</b>, elegir juegos y resolver dudas por WhatsApp. Soporte 24/7.</p>
+        <ul class="benefits" role="list">
+          <li>✅ <b>Ayuda paso a paso</b> para tu primera carga</li>
+          <li>⚡ <b>Métodos de pago locales</b> y verificados</li>
+          <li>🔒 <b>Retiros sin límite</b> y soporte inmediato</li>
+        </ul>
+        <div class="cta-row">
+          <a id="cta-hero" class="cta" href="#" rel="noopener" aria-label="Hablar por WhatsApp">
+            💬 Hablar por WhatsApp
+            <span class="tag" aria-hidden="true">Atención rápida</span>
+          </a>
+          <button id="cta-alt" class="btn-ghost" type="button">Quiero empezar</button>
+        </div>
+        <div class="trust" aria-label="Razones para confiar">
+          <div class="chip">Atención humana 24/7</div>
+          <div class="chip">Pagos verificados</div>
+          <div class="chip">Soporte en minutos</div>
+        </div>
+      </div>
+      <div class="phone-demo card" aria-hidden="true">
+        <img src="imagen 1.webp" alt="Vista de juegos online en el teléfono" style="width:100%; height:100%; object-fit:cover; border-radius:22px; display:block;" loading="lazy">
+        <div class="overlay"></div>
+        <!-- imagen decorativa para reforzar el contexto mobile -->
+      </div>
+    </section>
+
+    <img src="casino.jpg" alt="Ruleta en vivo" style="width:100%; border-radius:20px; margin:16px 0 12px; display:block;" loading="lazy">
+    <section class="card" style="margin-top:16px" aria-labelledby="steps-title">
+      <h2 id="steps-title" class="headline" style="font-size:22px">¿Cómo empiezo?</h2>
+      <div class="steps" style="margin-top:8px">
+        <div class="step"><div class="n">1</div><div>Presioná <b>“Hablar por WhatsApp”</b>.</div></div>
+        <div class="step"><div class="n">2</div><div>Se abre WhatsApp con un mensaje listo para enviar.</div></div>
+        <div class="step"><div class="n">3</div><div>Un asesor te guía para <b>cargar y jugar</b> en minutos.</div></div>
+      </div>
+      <div style="margin-top:12px">
+        <a id="cta-steps" class="cta" href="#" rel="noopener">💬 Hablar ahora</a>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:16px" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="headline" style="font-size:22px">Preguntas frecuentes</h2>
+      <details style="margin-top:10px"><summary>¿Puedo cargar por transferencia o billetera?</summary><div class="sub">Sí, te pasamos los métodos disponibles al momento y te guiamos paso a paso.</div></details>
+      <details><summary>¿Cuánto tardan los pagos?</summary><div class="sub">Las acreditaciones son rápidas. Si necesitás ayuda, el asesor te acompaña en el proceso.</div></details>
+      <details><summary>¿Qué juegos tienen?</summary><div class="sub">Ruleta en vivo, slots y más. Te recomendamos según tu preferencia.</div></details>
+    </section>
+  </div>
+
+  <!-- Sticky CTA -->
+  <div class="sticky-bar" aria-hidden="false">
+    <a id="cta-sticky" class="cta" href="#" rel="noopener" aria-label="Abrir WhatsApp">💬 Escribir por WhatsApp</a>
+  </div>
+
+  <!-- Recordatorio si volvió sin enviar -->
+  <div id="reminder" class="reminder" role="status" aria-live="polite">
+    <div class="inner">⏳ ¿Te ayudo a <b>cargar ahora</b>? Abrí WhatsApp y enviá el mensaje para que te llamemos.</div>
+  </div>
+
+  <!-- Exit intent / confirmación -->
+  <div id="exit" class="exit-overlay" role="dialog" aria-modal="true" aria-labelledby="exit-title" aria-hidden="true">
+    <div class="modal">
+      <h3 id="exit-title">Abrí WhatsApp y enviá el mensaje</h3>
+      <p>Un asesor te responde en minutos. Si cerrás esta ventana por error, podés volver con el botón de abajo.</p>
+      <div class="row">
+        <a id="exit-open" class="cta" href="#" rel="noopener">💬 Abrir WhatsApp</a>
+        <button id="exit-close" class="btn-ghost" type="button">Seguir navegando</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ======= CONFIG =======
+    const PHONE = '541169614630'; // tu número
+    const MESSAGES = [
+      'Hola 👋 Quiero empezar a jugar. ¿Me ayudás a cargar?',
+      'Hola, quiero abrir mi cuenta y cargar saldo ✅',
+      'Buenas! Necesito asistencia para cargar y empezar a jugar'
+    ];
+    const UTM = 'utm_source=landing&utm_medium=cta&utm_campaign=whatsapp_asesor';
+
+    // Construye link wa.me con mensaje aleatorio
+    function waLink(source){
+      const txt = encodeURIComponent(MESSAGES[Math.floor(Math.random()*MESSAGES.length)] + `\n\nRef: ${source}`);
+      return `https://wa.me/${PHONE}?text=${txt}&${UTM}&utm_content=${encodeURIComponent(source)}`;
+    }
+
+    // Tracking liviano
+    function track(event, meta){
+      try { navigator.sendBeacon('/track', JSON.stringify({event, meta, ts:Date.now()})); } catch(e){}
+      try { if (typeof fbq === 'function') fbq('trackCustom', event, meta || {}); } catch(e){}
+    }
+
+    // Wire de CTAs
+    function linkify(id, source){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const href = waLink(source);
+        track('WhatsAppInitiated', {source});
+        openExit(href);     // mostrar modal de confirmación + abrir WA
+      });
+    }
+
+    // Modal de confirmación / Exit intent controlado
+    const exitEl = document.getElementById('exit');
+    const exitClose = document.getElementById('exit-close');
+    const exitOpen = document.getElementById('exit-open');
+
+    function openExit(href){
+      exitEl.style.display='flex';
+      exitEl.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+      exitOpen.href = href;
+      // abrir WhatsApp en nueva pestaña para no perder la landing
+      const w = window.open(href, '_blank');
+      if(!w){ window.location.href = href; }
+    }
+    function closeExit(){
+      exitEl.style.display='none';
+      exitEl.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
+    exitClose.addEventListener('click', closeExit);
+    exitEl.addEventListener('click', (e)=>{ if(e.target === exitEl) closeExit(); });
+
+    // Aplicar a todos los CTAs
+    ['cta-hero','cta-alt','cta-steps','cta-sticky','exit-open'].forEach((id,i)=>{
+      if(id==='exit-open'){ return; } // exit-open se setea dinámicamente
+      linkify(id, id);
+    });
+
+    // Detector: el usuario volvió desde WhatsApp sin enviar
+    const reminder = document.getElementById('reminder');
+    const fromWa = (document.referrer || '').includes('whatsapp');
+    if(fromWa){
+      // Si vuelve desde WhatsApp, asumimos que quizá no envió el mensaje
+      reminder.style.display='block';
+      track('ReturnFromWhatsApp');
+    }
+
+    // Medición: cada click en enlaces a WhatsApp
+    document.addEventListener('click', function(e){
+      const a = e.target.closest('a[href]');
+      if(!a) return;
+      const href = a.getAttribute('href')||'';
+      if(/wa\.me|whatsapp\.com/i.test(href)){
+        track('ClickWhatsApp', {href});
+      }
+    });
+
+    // Fallback: si no hay interacción en 25s mostrar nudge suave
+    setTimeout(()=>{
+      if(reminder.style.display !== 'block'){
+        reminder.style.display='block';
+      }
+    }, 25000);
+  </script>
+</body>
+</html>
